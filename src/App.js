@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import * as R from 'ramda';
+
+const getParams = R.pipe(
+	R.split('/'),
+	R.last,
+	R.split('?'),
+	R.last,
+	R.split('&'),
+	R.map(R.split('=')),
+	R.fromPairs,
+);
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const {url, attack} = getParams(window.location.href);
+	return <div>
+		<h1>The DNS server blocked this webiste because it could attack you</h1>
+		<p>it contains {attack} type</p>
+		<p>blocked url: {url}</p>
+	</div>;
 }
 
 export default App;
