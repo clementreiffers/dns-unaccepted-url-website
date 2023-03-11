@@ -16,14 +16,9 @@ jobs:
         node-version: [18.x]
 
     steps:
-      - name: Checkout 🔔
-        uses: actions/checkout@v3
-
       - name: Install and Build ⚙️
-        run: |
-          yarn install
-          yarn build
+        run: yarn install
+
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          folder: build
+        run: yarn deploy
+
